@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#080b16" />
+    <meta
+      name="description"
+      content="Follow certified signature-size records and explore how few-time signatures disclose and authenticate hash labels."
+    />
+    <title>Few-time signatures · Poisson DAG</title>
+    <link rel="icon" href="mark.svg" type="image/svg+xml" />
+    <link
+      rel="preload"
+      href="fonts/dm-sans.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="site.css" />
+    <script type="module" src="signature.js"></script>
+    <script type="module" src="scores.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#leaderboard">Skip to leaderboard</a>
+    <header>
+      <nav class="shell" aria-label="Main">
+        <a class="brand" href="#top"
+          ><img src="mark.svg" width="32" height="32" alt="" />Poisson
+          <b>DAG</b></a
+        >
+        <span class="nav-divider"></span>
+        <a class="nav-item" href="#leaderboard">Leaderboard</a>
+        <a class="nav-item" href="#activity">Write-ups</a>
+        <a class="nav-item" href="#bounds">Signature bounds</a>
+        <a
+          class="repo-link"
+          href="https://github.com/few-time-signature/challenge"
+          >Repository</a
+        >
+      </nav>
+    </header>
+
+    <main id="top">
+      <div class="hero">
+        <div class="shell hero-layout">
+          <div class="intro">
+            <p class="eyebrow">
+              <span class="status-dot"></span> Pre-launch
+              <span class="muted">/</span> Proof checks open
+            </p>
+            <h1>Few-time<br /><em>signatures.</em></h1>
+            <p class="summary">
+              How short can a hash-based signature be? Build a smaller
+              construction or prove how many bytes every eligible scheme needs.
+            </p>
+            <div class="actions">
+              <a
+                class="primary"
+                href="https://github.com/few-time-signature/challenge/blob/main/RULES.md#submit-a-construction"
+                >Check a construction</a>
+              <a class="secondary" href="https://github.com/few-time-signature/challenge/blob/main/RULES.md#submit-a-lower-bound">Check a lower bound</a>
+            </div>
+          </div>
+          <figure class="experiment" aria-labelledby="diagram-title">
+            <div class="experiment-head">
+              <span class="micro" id="diagram-title">Hash-DAG simulation</span
+              ><button class="motion" id="motion" type="button">Pause</button>
+            </div>
+            <canvas
+              id="dag"
+              role="img"
+              aria-label="A toy hash tree with eight leaves and one public root."
+              >The signer discloses a set of node labels. The verifier combines
+              them by hashing toward the public root.</canvas
+            >
+            <div
+              class="phase-bar"
+              role="group"
+              aria-label="Signature animation stage"
+            >
+              <button type="button" data-phase="0" aria-pressed="true">
+                Disclose
+              </button>
+              <button type="button" data-phase="1" aria-pressed="false">
+                Verify
+              </button>
+              <button type="button" data-phase="2" aria-pressed="false">
+                Reuse
+              </button>
+            </div>
+            <figcaption id="phase-note">
+              Four mint labels make up the first signature, σ₁.
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="limits">
+        <dl class="shell">
+          <div>
+            <dt>Key uses</dt>
+            <dd>Poisson(1)</dd>
+          </div>
+          <div>
+            <dt>Expected signing</dt>
+            <dd>≤ 2<sup>24</sup> <small>hashes</small></dd>
+          </div>
+          <div>
+            <dt>Expected verification</dt>
+            <dd>≤ 512 <small>hashes</small></dd>
+          </div>
+          <div>
+            <dt>DAG covering probability</dt>
+            <dd>≤ 2<sup>−128</sup></dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="shell dashboard">
+        <section class="card bounds" id="bounds" aria-labelledby="bounds-title">
+          <div class="card-head">
+            <h2 id="bounds-title">Signature bounds</h2>
+            <span class="micro">Signature bytes</span>
+          </div>
+          <div class="metrics">
+            <div>
+              <span class="metric-label"
+                ><i class="swatch blue"></i>Verified lower bound</span
+              ><strong id="lower">—</strong>
+            </div>
+            <div>
+              <span class="metric-label"
+                ><i class="swatch green"></i>Verified upper bound</span
+              ><strong id="upper">—</strong>
+            </div>
+            <div>
+              <span class="metric-label">Scoring opens at</span>
+              <strong id="opening-upper">2,020 B</strong>
+            </div>
+          </div>
+          <div class="plot-wrap">
+            <svg
+              id="plot"
+              role="group"
+              tabindex="0"
+              aria-labelledby="plot-title plot-desc"
+            ></svg>
+            <div class="point-popup" id="point-popup" role="dialog" aria-label="Chart point" hidden>
+              <strong id="point-title"></strong>
+              <div id="point-links"></div>
+              <button id="point-close" type="button" aria-label="Close chart detail">×</button>
+            </div>
+          </div>
+          <p class="chart-readout" id="readout" aria-live="off">
+            Loading signature bounds…
+          </p>
+          <p class="card-note">Select a construction point for its design paper and proof. The official curves start at the published opening bounds.</p>
+          <details class="chart-sources">
+            <summary>Parameter sets and sources</summary>
+            <div class="scroll">
+              <table aria-label="Historical constructions and challenge-specific sizes">
+                <thead><tr><th>Design paper</th><th class="num">Bytes</th><th>Challenge evidence</th></tr></thead>
+                <tbody id="construction-sources"></tbody>
+              </table>
+            </div>
+          </details>
+        </section>
+
+        <section
+          class="card board"
+          id="leaderboard"
+          aria-labelledby="board-title"
+        >
+          <div class="card-head">
+            <h2 id="board-title">Leaderboard</h2>
+            <span class="micro" id="team-count"></span>
+          </div>
+          <div class="segments" role="group" aria-label="Leaderboard track">
+            <button type="button" data-track="lower-bound" aria-pressed="true">
+              Lower bound
+            </button>
+            <button
+              type="button"
+              data-track="construction"
+              aria-pressed="false"
+            >
+              Construction
+            </button>
+          </div>
+          <p class="track-hint" id="track-hint">
+            Higher byte bounds rank first.
+          </p>
+          <div class="scroll">
+            <table aria-label="Team rankings">
+              <thead>
+                <tr>
+                  <th scope="col">Rank</th>
+                  <th scope="col">Team</th>
+                  <th scope="col" class="num">Score</th>
+                  <th scope="col" class="num">Gain</th>
+                </tr>
+              </thead>
+              <tbody id="ranks"></tbody>
+            </table>
+          </div>
+          <a
+            class="board-link"
+            href="https://github.com/few-time-signature/challenge/blob/main/RULES.md"
+            >Scoring rules</a
+          >
+          <a class="board-link" href="https://github.com/few-time-signature/challenge/blob/main/RULES.md#submit-with-the-challenge-cli">Submit with the CLI</a>
+        </section>
+
+        <section class="card activity" id="activity" aria-labelledby="activity-title">
+          <div class="card-head">
+            <h2 id="activity-title">Submission write-ups</h2>
+            <a href="https://github.com/few-time-signature/challenge/blob/main/RULES.md#public-write-up">Write-up rules</a>
+          </div>
+          <p class="card-note">Authors explain the result in their own words. Each judge receipt verifies the Lean claim for the linked revision.</p>
+          <div id="history" class="writeups" aria-live="polite">Loading verified submissions…</div>
+        </section>
+        <noscript
+          ><a href="https://github.com/few-time-signature/challenge/blob/main/docs/scores.json"
+            >Read the verified scores in JSON format.</a
+          ></noscript
+        >
+      </div>
+    </main>
+    <footer class="shell">
+      <span id="sync" role="status">Loading scores…</span
+      ><a
+        href="https://github.com/few-time-signature/challenge/blob/main/docs/scores.json"
+        >Score ledger</a
+      >
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,62 @@
+[
+  {
+    "track": "construction",
+    "id": "port-check-fors-c",
+    "team": "organizer",
+    "bound_bytes": 2020,
+    "head": "702ca225b7fc92ae9258e444ff2a07de3d351a1e",
+    "reference": "fors-c-17-7-19-v1",
+    "title": "2,020-byte FORS construction",
+    "summary": "There are 7 trees of height 17. Each signature transmits one committed leaf's private source and 17 sibling labels per tree. The maximum encoded size is 16 × 7 × (17+1) plus 4 counter bytes. The encoder uses 19 virtual zero bits and a 26-bit counter. Expected signing takes at most 3,801,087 hashes. A successful verification takes at most 134 hashes. The proof bounds the raw target covering probability by 2⁻¹²⁸ under one shared Poisson(1) history count.",
+    "pr": 1,
+    "run": 45390853709
+  },
+  {
+    "track": "construction",
+    "id": "pors-fp-1780-lean",
+    "team": "organizer",
+    "bound_bytes": 1780,
+    "head": "ac19116395aa9e7a1c5b6c19f0a51913fe48acc6",
+    "reference": "pors-fp-1780-v1",
+    "title": "PORS+FP, 1,780 bytes",
+    "summary": "One accepted rank selects nine distinct leaves of a 491,520-leaf tree. The encoder accepts a support when it needs at most 102 sibling labels. The signature carries at most 111 labels of 16 bytes and a four-byte counter. Verification uses at most 121 hashes and the expected signing ceiling is 16,133,231 hashes.",
+    "pr": 6,
+    "run": 45442801544
+  },
+  {
+    "track": "construction",
+    "id": "bpors-fp-1492-lean",
+    "team": "organizer",
+    "bound_bytes": 1492,
+    "head": "636b739dedf494ca5424f433400bc33bacb24f2f",
+    "reference": "bpors-fp-1492-v1",
+    "title": "BPORS+FP, 1,492 bytes",
+    "summary": "Each coordinate chooses one of 1,024 buckets and six distinct leaves of a 1,792-leaf tree. The two supports use at most 61 inner siblings in total. Six private labels and ten outer siblings per coordinate give at most 93 transmitted labels and a four-byte counter. The expected signing ceiling is 15,333,760 hashes and verification needs at most 106.",
+    "pr": 7,
+    "run": 45442897982
+  },
+  {
+    "track": "construction",
+    "id": "bpors-c-bfp-1188",
+    "team": "organizer",
+    "bound_bytes": 1188,
+    "head": "30deab652d059fa699f666f6867dca2a376559b2",
+    "reference": "bpors-c-bfp-1188-v1",
+    "title": "BPORS-C+BFP, 1,188 bytes",
+    "summary": "Each of the four coordinates chooses a bucket, a four-leaf support in a 24-leaf tree, and four nonnegative residual chain depths with sum 32. A shared budget of 18 inner siblings leaves at most 74 transmitted labels. With a four-byte counter the signature takes at most 1,188 bytes. The signing ceiling is 9,816,603 hashes and a successful verification uses at most 219.",
+    "pr": 5,
+    "run": 45443005759
+  },
+  {
+    "track": "construction",
+    "id": "grs-cc-756-lean",
+    "team": "organizer",
+    "bound_bytes": 756,
+    "head": "cdfe20bba0e0142736bf78b823d62d0ebed87b0e",
+    "reference": "grs-cc-v1",
+    "title": "GRS-CC at 756 bytes",
+    "summary": "An accepted signature discloses at most 47 labels of 16 bytes and one four-byte counter. The seven layers contribute six labels each. Five more labels authenticate the outer choice. The registered graph and encoder use fewer than 11,676,797 expected signing hashes and at most 441 verification hashes on success.",
+    "pr": 8,
+    "run": 45450347082
+  }
+]
