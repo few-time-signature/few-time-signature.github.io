@@ -1,6 +1,10 @@
 // These are challenge parameter sets, ordered by the design paper's first ePrint.
 // Only the score ledger below determines official standings.
 const forsEntry = "/tree/main/examples/entries/construction/";
+export const openingConstruction = {
+  name: "GRS-CC", bytes: 756, certified: true, paper: "2026/2502",
+  source: "/blob/4790c9c465857159aa8e6bda1ebd069341096a74/submissions/construction/grs-cc-756-lean/proof/Main.lean",
+};
 export const constructions = [
   { name: "FORS", bytes: 2432, certified: true, paper: "2019/1086", source: forsEntry + "fors-2432" },
   { name: "FORS+C", bytes: 2132, certified: true, paper: "2022/778", source: forsEntry + "fors-c-2132" },
@@ -8,7 +12,7 @@ export const constructions = [
   { name: "PORS+FP", bytes: 1780, certified: true, paper: "2025/2069", source: "/blob/ac19116395aa9e7a1c5b6c19f0a51913fe48acc6/submissions/construction/pors-fp-1780-lean/proof/Main.lean" },
   { name: "BPORS+FP", bytes: 1492, certified: true, paper: "2026/1328", source: "/blob/636b739dedf494ca5424f433400bc33bacb24f2f/submissions/construction/bpors-fp-1492-lean/proof/Main.lean" },
   { name: "BPORS-C+BFP", bytes: 1188, certified: true, paper: "2026/2374", source: "/blob/30deab652d059fa699f666f6867dca2a376559b2/submissions/construction/bpors-c-bfp-1188/proof/Main.lean" },
-  { name: "GRS-CC", bytes: 756, certified: true, paper: "2026/2502", source: "/blob/cdfe20bba0e0142736bf78b823d62d0ebed87b0e/submissions/construction/grs-cc-756-lean/proof/Main.lean" },
+  openingConstruction,
 ];
 
 // One sample per accepted snapshot, in the judge's intake order. Only records move a bound.
@@ -54,7 +58,7 @@ export const referencePapers = {
   "pors-fp-1780-v1": "2025/2069",
   "bpors-fp-1492-v1": "2026/1328",
   "bpors-c-bfp-1188-v1": "2026/2374",
-  "grs-cc-v1": "2026/2502",
+  "grs-cc-v1": openingConstruction.paper,
 };
 
 export function publicationURL(entry) {

@@ -1,4 +1,4 @@
-import { constructions, boundSeries, axis, publicationURL } from "./records.mjs";
+import { constructions, openingConstruction, boundSeries, axis, publicationURL } from "./records.mjs";
 
 const repo = "https://github.com/few-time-signature/challenge";
 const svg = document.querySelector("#plot");
@@ -304,10 +304,11 @@ function drawPlot() {
         : "M " + geometry[index] + " " + y(value);
       const source = i ? "/pull/" + ledger.history[i - 1].pr
         : key === "lower" ? "/blob/main/formal/PoissonDAG/V2/Lower99.lean"
-        : "/tree/main/examples/entries/construction/fors-c-2020";
-      const paper = key === "lower" ? null : i ? publicationURL(ledger.history[i - 1]) : "https://eprint.iacr.org/2022/778";
+        : openingConstruction.source;
+      const paper = key === "lower" ? null : i ? publicationURL(ledger.history[i - 1]) : paperURL(openingConstruction);
       dots.push(marker(index, y(value), color, true, paper, repo + source,
-        sample.label + " · certified " + key + " bound · " + fmt(value)));
+        (i === 0 && key === "upper" ? "Opening · " + openingConstruction.name : sample.label)
+        + " · certified " + key + " bound · " + fmt(value)));
       previous = value;
     }
     if (path)
