@@ -5,10 +5,10 @@ export const constructions = [
   { name: "FORS", bytes: 2432, certified: true, paper: "2019/1086", source: forsEntry + "fors-2432" },
   { name: "FORS+C", bytes: 2132, certified: true, paper: "2022/778", source: forsEntry + "fors-c-2132" },
   { name: "FORS+C", bytes: 2020, certified: true, paper: "2022/778", source: forsEntry + "fors-c-2020" },
-  { name: "PORS+FP", bytes: 1780, certified: true, paper: "2025/2069", source: "/pull/6" },
-  { name: "BPORS+FP", bytes: 1492, certified: true, paper: "2026/1328", source: "/pull/7" },
-  { name: "BPORS-C+BFP", bytes: 1188, certified: true, paper: "2026/2374", source: "/pull/5" },
-  { name: "GRS-CC", bytes: 756, certified: true, paper: "2026/2502", source: "/pull/8" },
+  { name: "PORS+FP", bytes: 1780, certified: true, paper: "2025/2069", source: "/blob/ac19116395aa9e7a1c5b6c19f0a51913fe48acc6/submissions/construction/pors-fp-1780-lean/proof/Main.lean" },
+  { name: "BPORS+FP", bytes: 1492, certified: true, paper: "2026/1328", source: "/blob/636b739dedf494ca5424f433400bc33bacb24f2f/submissions/construction/bpors-fp-1492-lean/proof/Main.lean" },
+  { name: "BPORS-C+BFP", bytes: 1188, certified: true, paper: "2026/2374", source: "/blob/30deab652d059fa699f666f6867dca2a376559b2/submissions/construction/bpors-c-bfp-1188/proof/Main.lean" },
+  { name: "GRS-CC", bytes: 756, certified: true, paper: "2026/2502", source: "/blob/cdfe20bba0e0142736bf78b823d62d0ebed87b0e/submissions/construction/grs-cc-756-lean/proof/Main.lean" },
 ];
 
 // One sample per accepted snapshot, in the judge's intake order. Only records move a bound.
