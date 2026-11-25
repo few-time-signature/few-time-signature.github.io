@@ -303,7 +303,7 @@ function drawPlot() {
       path += path ? " H " + geometry[index] + " V " + y(value)
         : "M " + geometry[index] + " " + y(value);
       const source = i ? "/pull/" + ledger.history[i - 1].pr
-        : key === "lower" ? "/blob/main/formal/PoissonDAG/V2/Lower99.lean"
+        : key === "lower" ? "/blob/main/formal/PoissonDAG/V2/OpeningLowerBound.lean"
         : openingConstruction.source;
       const paper = key === "lower" ? null : i ? publicationURL(ledger.history[i - 1]) : paperURL(openingConstruction);
       dots.push(marker(index, y(value), color, true, paper, repo + source,
